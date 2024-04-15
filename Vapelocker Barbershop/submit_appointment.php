@@ -1,0 +1,311 @@
+<?php
+$servername = "localhost"; // Change this to your MySQL server name
+$username = "root";     // Change this to your MySQL username
+$password = "";     // Change this to your MySQL password
+$dbname = "appointments";         // Change this to your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $appointment_date = $_POST["appointment_date"];
+    $car_model = $_POST["car_model"];
+    $message = $_POST["message"];
+
+    $sql = "INSERT INTO appointments (name, email, phone, appointment_date, car_model, message) 
+            VALUES ('$name', '$email', '$phone', '$appointment_date', '$car_model', '$message')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Appointment booked successfully!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+$conn->close();
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scaale=1.0">
+    <title>The Vapelocker Barbershop Kajang Utama</title>
+    <!-- Link To CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Box Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <!-- Nav Container -->
+        <div class="nav container">
+            <!-- Menu Icon -->
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <!-- Logo -->
+            <a href="#" class="logo">The Vapelocker<span> Barbershop</span></a>
+            <!-- Nav List -->
+            <ul class="navbar">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#hairstyles">Hairstyles</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#barbers">Barbers</a></li>
+                <li><a href="#blog">Our Blog</a></li>
+                <li><a href="admin_login.php">Admin</a></li>
+            </ul>
+            <!-- Search Icon -->
+<i class='bx bx-search' id="search-icon"></i>
+<!-- Search Box -->
+<div class="search-box container" id="search-box">
+    <input type="search" name="" id="search-input" placeholder="Search here...">
+</div>
+
+            </div>
+        </div>
+    </header>
+    <!-- Home -->
+    <section class="home" id="home">
+        <div class="home-text">
+            <h1>We Have Every Style <br>Your <span>Hair</span> Need</h1>
+            <p>Choose the best style for this upcoming Raya Celebration!</p>
+            <!-- Home Button -->
+            <a href="#hairstyles" class="btn">Discover Now</a>
+        </div>
+    </section>
+    <!-- Hairstyles Section -->
+    <section class="hairstyles" id="hairstyles">
+        <div class="heading">
+            <span>All hairstyles</span>
+            <h2>We have various types of hairstyles for our beloved cutomers</h2>
+            <p>Trending Haircut In 2024</p>
+        </div>
+        <!-- Hairstyles Container -->
+        <div class="hairstyles-container container">
+            <!-- Box 1 -->
+            <div class="box">
+                <img src="mullet.png" alt="">
+                <h2>Modern Mullet</h2>
+            </div>
+            <!-- Box 2 -->
+            <div class="box">
+                <img src="edgar.png" alt="">
+                <h2>Edgar</h2>
+            </div>
+            <!-- Box 3 -->
+            <div class="box">
+                <img src="taper.png" alt="">
+                <h2>Taper Fade</h2>
+            </div>
+            <!-- Box 4 -->
+            <div class="box">
+                <img src="buzzcut.png" alt="">
+                <h2>Buzz Cut</h2>
+            </div>
+            <!-- Box 5 -->
+            <div class="box">
+                <img src="burst.png" alt="">
+                <h2>Burst Fade</h2>
+            </div>
+            <!-- Box 6 -->
+            <div class="box">
+                <img src="midfade.png" alt="">
+                <h2>Mid Fade</h2>
+            </div>
+        </div>
+    </section>
+    <!-- About -->
+    <section class="about container" id="about">
+        <div class="about-img">
+            <img src="aboutvl.png" alt="">
+        </div>
+        <div class="about-text">
+         <span>About Us</span>
+         <h2>Cheap Prices With <br>Quality Haircut</h2>
+         <p>Get your dream haircut only with us </p>
+         <!-- About Button -->
+         <a href="#about" class="btn" id="More-about-us-btn">More About Us</a>
+        <div id="about-description" style="display: none;">
+            <p>Welcome to The Vapelocker Barbershop Kajang Utama, where style meets sophistication. Nestled in the heart of Kajang Utama, our shop is a sanctuary for those seeking top-notch grooming services with a touch of modern flair. With a team of skilled barbers dedicated to perfecting your look, we offer a range of services tailored to suit your individual needs. Whether you're after a classic cut, a stylish beard trim, or a relaxing shave, our attention to detail and commitment to excellence ensure you'll leave feeling confident and rejuvenated. Step into our shop and experience the fusion of traditional barbering techniques with contemporary trends.</p>
+            </div>
+    </div>
+         
+</section>
+
+<script>
+    document.getElementById('More-about-us-btn').addEventListener('click', function() {
+        document.getElementById('about-description').style.display = 'block';
+    });
+</script>
+
+
+
+        </div>
+    </section>
+    <!-- Barbers Section -->
+    <section class="barbers" id="barbers">
+        <div class="heading">
+        <span>Choose Your Barber</span>
+        <h2>Our Barbers Are Always Excellent</h2>
+        <p>Surely It Will Never Disappoint Our Customer</p>
+        </div>
+        <!-- Barbers Container -->
+        <div class="Barbers-container container">
+            <!-- Box 1 -->
+            <div class="box">
+                <img src="Haziq.png" alt="">
+                <h3>Barber Haziq</h3>
+                <span>Mid Taper Specialist</span>
+                <i class='bx bxs-star'>(6 Reviews)</i>
+                <a href="#" class="btn" onclick="showAppointmentForm('Porsche Car')" style="padding-right: 10px; margin-left: 80px;">Book Now</a>
+            </div>
+            <!-- Box 2 -->
+            <div class="box">
+                <img src="khuzairi.png" alt="">
+                <h3>Barber Khuzairi</h3>
+                <span>Modern Mullet Specialist</span>
+                <i class='bx bxs-star'>(92 Reviews)</i>
+                <a href="#" class="btn" onclick="showAppointmentForm('Porsche Car')" style="padding-right: 10px; margin-left: 80px;">Book Now</a>
+            </div>
+            <!-- Box 3 -->
+            <div class="box">
+                <img src="Azim.png" alt="">
+                <h3>Barber Azim</h3>
+                <span>Burst Fade Specialist</span>
+                <i class='bx bxs-star'>(32 Reviews)</i>
+                <a href="#" class="btn" onclick="showAppointmentForm('Porsche Car')" style="padding-right: 10px; margin-left: 80px;">Book Now</a>
+            </div>
+            <!-- Box 4 -->
+            <div class="box">
+                <img src="Chew.png" alt="">
+                <h3>Barber Chew</h3>
+                <span>Buzz Cut Specialist</span>
+                <i class='bx bxs-star'>(1000 Reviews)</i>
+                <a href="#" class="btn" onclick="showAppointmentForm('Porsche Car')" style="padding-right: 10px; margin-left: 80px;">Book Now</a>
+            </div>
+            <!-- Box 5 -->
+            <div class="box">
+                <img src="Syamil.png" alt="">
+                <h3>Barber Syamil</h3>
+                <span>Taper Fade Specialist</span>
+                <i class='bx bxs-star'>(90 Reviews)</i>
+                <a href="#" class="btn" onclick="showAppointmentForm('Porsche Car')" style="padding-right: 10px; margin-left: 80px;">Book Now</a>
+            </div>
+            <!-- Box 6 -->
+            <div class="box">
+                <img src="Zidan.png" alt="">
+                <h3>Barber Zidan</h3>
+                <span>Edgar Specialist</span>
+                <i class='bx bxs-star'>(20 Reviews)</i>
+                <a href="#" class="btn" onclick="showAppointmentForm('Porsche Car')" style="padding-right: 10px; margin-left: 80px;">Book Now</a>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Container -->
+    <section class="blog" id="blog">
+        <div class="heading">
+            <span>Blog & News</span>
+            <h2>Our Blog Content</h2>
+            <p>Don't miss our upcoming promotions and offers!</p>
+            </div>
+            <!-- Blog Container -->
+            <div class="blog-container container">
+                <!-- Box 1 -->
+                <div class="box">
+                    <img src="pomade.png" alt="">
+                    <span>Mar 20 2024</span>
+                    <h3>Upcoming Pomade In Our Shop</h3>
+                    <p>We will launch this product soon,keep updated!</p>
+                </div>
+                <!-- Box 2 -->
+                <div class="box">
+                    <img src="raya.png" alt="">
+                    <span>Mar 23 2024</span>
+                    <h3>Raya Promotion!!</h3>
+                    <p>Ready to get yourself a new haircut with reasonable price!</p>
+                </div>
+                <!-- Box 3 -->
+                <div class="box">
+                    <img src="academy.png" alt="">
+                    <span>Mar 18 2024</span>
+                    <h3>Barber Academy</h3>
+                    <p>Let's join us by learning some barbering skills in our academy.</p>
+                </div>
+            </div>
+    </section>
+    <!-- Footer -->
+    <section class="footer">
+        <div class="footer-container container">
+            <div class="footer-box">
+                <a href="#" class="logo">The Vapelocker<span>Barbershop</span></a>
+                <div class="social">
+                    <a href="https://facebook.com/VLKajang2021"><i class='bx bxl-facebook' ></i></a>
+                    <a href="https://www.instagram.com/vapelockerbarber/"><i class='bx bxl-instagram' ></i></a>
+                    <a href="https://www.tiktok.com/@vapelocker_?_t=8l4BPcdz4hG&_r=1"><i class='bx bxl-tiktok' ></i></a>
+                </div>
+            </div>
+            <div class="footer-box">
+                <h3>Page</h3>
+                <a href="#home">Home</a>
+                <a href="#hairstyles">Hairstyles</a>
+                <a href="#about">About</a>
+                <a href="#barbers">Barbers</a>
+            </div>
+            <div class="footer-box">
+                <h3>Working Hours</h3>
+                <p>Our Operation Hours : <br> Sunday to Thursday : 12.00pm - 10.30pm <br> Friday : 2.30pm - 10.30pm</p>
+
+            </div>
+            <div class="footer-box">
+                <h3>Contact</h3>
+                <a href="https://wa.me/60189704551">Whatsapp</a>
+                <a href="mailto:kl2207011684@student.kuptm.edu.my">Email</a>
+        </div>
+    </section>
+    <!-- Copyright -->
+    <div class="copyright">
+        <p>&#169; Fariz Lotfi All Right Reserved</p>
+    </div>
+    <!-- Link To Js -->
+    <script src="main.js"></script>
+
+    <!-- Appointment Form -->
+<div id="appointment-form" class="appointment-form">
+    <form action="submit_appointment.php" method="post">
+        <h2>Book an Appointment</h2>
+        <label for="name">Name:</label>
+        <input type="text" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" name="phone" required>
+
+        <label for="appointment_date">Appointment Date:</label>
+        <input type="date" name="appointment_date" required>
+
+        <input type="hidden" name="car_model" id="appointment-car-model" value="">
+
+        <label for="message">Additional Message:</label>
+        <textarea name="message" rows="4"></textarea>
+
+        <button type="submit" class="btn">Submit Appointment</button>
+        <button type="button" class="btn" onclick="document.getElementById('appointment-form').style.display='none'">Close</button>
+    </form>
+</div>
+
+
+</body>
+</html>
